@@ -1,0 +1,45 @@
+<section class="page">
+  <h3>My Bookings</h3>
+  
+  <div class="filters">
+    <input type="date" [(ngModel)]="filters.from" placeholder="From Date">
+    <input type="date" [(ngModel)]="filters.to" placeholder="To Date">
+    <button (click)="load()">Apply Filters</button>
+  </div>
+
+  <div *ngIf="message" [class]="'msg ' + (message.includes('success') || message.includes('Success') ? 'success' : 'error')">{{ message }}</div>
+
+  <table class="table" *ngIf="bookings.length">
+    <thead>
+      <tr>
+        <th>Reservation ID</th>
+        <th>Room No</th>
+        <th>Check-in Date</th>
+        <th>Check-out Date</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let b of bookings">
+        <td>{{ b.id }}</td>
+        <td>{{ b.roomNo }}</td>
+        <td>
+          <input type="date" [(ngModel)]="b.checkInDate" style="padding: 6px; border-radius: 4px; border: 1px solid #ccc;">
+        </td>
+        <td>
+          <input type="date" [(ngModel)]="b.checkOutDate" style="padding: 6px; border-radius: 4px; border: 1px solid #ccc;">
+        </td>
+        <td>
+          <span class="chip" [ngClass]="b.status?.toLowerCase()">{{ b.status }}</span>
+        </td>
+        <td>
+          <button class="update-btn" (click)="updateDates(b)">Update</button>
+          <button class="cancel-btn" (click)="cancel(b.id)" [disabled]="b.status==='CANCELLED'">Cancel</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div *ngIf="!bookings.length && !message" class="muted">No bookings found.</div>
+</section>

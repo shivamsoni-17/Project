@@ -1,0 +1,140 @@
+<section class="page">
+  <h3>My Bills & Payments</h3>
+  
+  <div *ngIf="message" [class]="'msg ' + (message.includes('success') || message.includes('Success') ? 'success' : 'error')">{{ message }}</div>
+
+  <table class="table" *ngIf="bills.length">
+    <thead>
+      <tr>
+        <th>Bill ID</th>
+        <th>Reservation ID</th>
+        <th>Amount</th>
+        <th>Additional Charges</th>
+        <th>Total</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let bill of bills">
+        <td>{{ bill.id }}</td>
+        <td>{{ bill.reservationId }}</td>
+        <td>₹ {{ bill.amount }}</td>
+        <td>₹ {{ bill.addCharges }}</td>
+        <td><strong>₹ {{ getTotal(bill) }}</strong></td>
+        <td>
+          <span class="chip" [ngClass]="getStatusClass(bill.payStatus)">
+            {{ bill.payStatus?.replace('_', ' ') }}
+          </span>
+        </td>
+        <td>
+          <button class="pay-btn" (click)="openPayModal(bill)" 
+                  [disabled]="bill.payStatus === 'PAID'">
+            Pay Bill
+          </button>
+          <button class="invoice-btn" (click)="generateInvoice(bill.id)">
+            Generate Invoice
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div *ngIf="!bills.length && !message" class="muted">No bills found.</div>
+
+  <!-- Pay Bill Modal -->
+  <div class="modal" *ngIf="selectedBill">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Pay Bill #{{ selectedBill.id }}</h3>
+        <button class="close-btn" (click)="closePayModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="bill-details">
+          <p><strong>Reservation ID:</strong> {{ selectedBill.reservationId }}</p>
+          <p><strong>Amount:</strong> ₹ {{ selectedBill.amount }}</p>
+          <p><strong>Additional Charges:</strong> ₹ {{ selectedBill.addCharges }}</p>
+          <p class="total"><strong>Total Amount:</strong> ₹ {{ getTotal(selectedBill) }}</p>
+        </div>
+        
+        <div class="payment-form">
+          <label>Payment Mode:</label>
+          <select [(ngModel)]="paymentData.mode" required>
+            <option value="">Select Payment Mode</option>
+            <option value="UPI">UPI</option>
+            <option value="CARD">Card</option>
+            <option value="NETBANKING">Net Banking</option>
+            <option value="WALLET">Wallet</option>
+            <option value="CASH">Cash</option>
+          </select>
+
+          <label>Amount to Pay:</label>
+          <input type="number" [(ngModel)]="paymentData.amount" 
+                 [max]="getTotal(selectedBill)" 
+                 min="0" 
+                 step="0.01" 
+                 required>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="cancel-btn" (click)="closePayModal()">Cancel</button>
+        <button class="pay-submit-btn" (click)="payBill()">Pay Now</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Invoice Modal -->
+  <div class="modal" *ngIf="showInvoice && invoice">
+    <div class="modal-content invoice-modal">
+      <div class="modal-header">
+        <h3>Invoice</h3>
+        <button class="close-btn" (click)="closeInvoice()">&times;</button>
+      </div>
+      <div class="modal-body invoice-body">
+        <div class="invoice-header">
+          <h2>HotelEase</h2>
+          <p>Invoice</p>
+        </div>
+        <div class="invoice-details">
+          <div class="invoice-row">
+            <span>Bill ID:</span>
+            <span>{{ invoice.billId }}</span>
+          </div>
+          <div class="invoice-row">
+            <span>Reservation ID:</span>
+            <span>{{ invoice.reservationId }}</span>
+          </div>
+          <div class="invoice-row">
+            <span>Date:</span>
+            <span>{{ invoice.createdAt | date:'medium' }}</span>
+          </div>
+          <div class="invoice-row">
+            <span>Room Charges:</span>
+            <span>₹ {{ invoice.amount }}</span>
+          </div>
+          <div class="invoice-row">
+            <span>Additional Charges:</span>
+            <span>₹ {{ invoice.addCharges }}</span>
+          </div>
+          <div class="invoice-row total-row">
+            <span><strong>Total Amount:</strong></span>
+            <span><strong>₹ {{ invoice.total }}</strong></span>
+          </div>
+          <div class="invoice-row">
+            <span>Payment Status:</span>
+            <span class="chip" [ngClass]="getStatusClass(invoice.payStatus)">
+              {{ invoice.payStatus?.replace('_', ' ') }}
+            </span>
+          </div>
+          <div class="invoice-row" *ngIf="invoice.transactionId">
+            <span>Transaction ID:</span>
+            <span>{{ invoice.transactionId }}</span>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="close-btn" (click)="closeInvoice()">Close</button>
+      </div>
+    </div>
+  </div>
+</section>

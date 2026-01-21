@@ -1,0 +1,34 @@
+<section class="page">
+  <h2>Bills</h2>
+  <div class="filters">
+    <input placeholder="User ID" [(ngModel)]="filters.userId">
+    <input placeholder="Reservation ID" [(ngModel)]="filters.reservationId">
+    <select [(ngModel)]="filters.status">
+      <option value="">Status</option>
+      <option *ngFor="let s of ['UNPAID','PAID','PARTIALLY PAID','REFUNDED','CANCELLED']">{{ s }}</option>
+    </select>
+    <button (click)="load()">Search</button>
+  </div>
+
+  <div class="msg" *ngIf="message">{{ message }}</div>
+  <table class="table" *ngIf="bills.length">
+    <thead><tr><th>ID</th><th>Reservation</th><th>Amount</th><th>Add Charges</th><th>Status</th><th>Transaction</th><th>Created</th><th>Actions</th></tr></thead>
+    <tbody>
+      <tr *ngFor="let b of bills">
+        <td>{{ b.id }}</td>
+        <td>{{ b.reservationId }}</td>
+        <td>{{ b.amount }}</td>
+        <td>{{ b.addCharges }}</td>
+        <td>{{ b.payStatus }}</td>
+        <td>{{ b.transactionId || '-' }}</td>
+        <td>{{ b.createdAt }}</td>
+        <td>
+          <button (click)="setStatus(b.id, 'PAID')">Mark Paid</button>
+          <button (click)="setStatus(b.id, 'REFUNDED')">Refund</button>
+          <button (click)="invoice(b.id)">Invoice</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div *ngIf="!bills.length && !message" class="muted">No bills found.</div>
+</section>

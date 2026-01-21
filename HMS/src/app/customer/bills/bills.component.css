@@ -1,0 +1,358 @@
+/* Page container matching login/register style */
+.page {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.page h3 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #2a5298;
+}
+
+/* Table */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.table th {
+  background: linear-gradient(135deg, #2a5298, #1e3c72);
+  color: white;
+  padding: 15px;
+  text-align: left;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.table td {
+  padding: 12px 15px;
+  border-bottom: 1px solid #e0e0e0;
+  font-size: 14px;
+  color: #555;
+}
+
+.table tr:hover {
+  background: #f8f9fa;
+}
+
+.table tr:last-child td {
+  border-bottom: none;
+}
+
+/* Status chips */
+.chip {
+  padding: 6px 12px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: bold;
+  display: inline-block;
+}
+
+.chip.paid {
+  background: #d4edda;
+  color: #155724;
+}
+
+.chip.partial {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.chip.unpaid {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+/* Buttons in table */
+.table button {
+  padding: 8px 16px;
+  margin: 0 5px;
+  border: none;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.table button.pay-btn {
+  background: #28a745;
+  color: white;
+}
+
+.table button.pay-btn:hover {
+  background: #218838;
+}
+
+.table button.invoice-btn {
+  background: #2a5298;
+  color: white;
+}
+
+.table button.invoice-btn:hover {
+  background: #1e3c72;
+}
+
+.table button:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+.muted {
+  color: #666;
+  margin-top: 8px;
+  font-size: 13px;
+}
+
+.msg {
+  padding: 12px;
+  border-radius: 6px;
+  margin: 15px 0;
+  font-size: 14px;
+}
+
+.msg.success {
+  background: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+.msg.error {
+  background: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+
+/* Modal */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+  max-width: 500px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.modal-header h3 {
+  margin: 0;
+  color: #2a5298;
+  font-size: 20px;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 28px;
+  color: #999;
+  cursor: pointer;
+  padding: 0;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.3s;
+}
+
+.close-btn:hover {
+  background: #f0f0f0;
+  color: #333;
+}
+
+.modal-body {
+  padding: 20px;
+}
+
+.bill-details {
+  background: #f8f9fa;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.bill-details p {
+  margin: 8px 0;
+  color: #555;
+}
+
+.bill-details .total {
+  font-size: 18px;
+  color: #2a5298;
+  border-top: 2px solid #2a5298;
+  padding-top: 10px;
+  margin-top: 10px;
+}
+
+.payment-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.payment-form label {
+  font-weight: bold;
+  color: #333;
+  font-size: 14px;
+}
+
+.payment-form select,
+.payment-form input {
+  padding: 12px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  transition: border 0.3s;
+}
+
+.payment-form select:focus,
+.payment-form input:focus {
+  outline: none;
+  border-color: #2a5298;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 20px;
+  border-top: 1px solid #e0e0e0;
+}
+
+.modal-footer button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.modal-footer .cancel-btn {
+  background: #6c757d;
+  color: white;
+}
+
+.modal-footer .cancel-btn:hover {
+  background: #5a6268;
+}
+
+.modal-footer .pay-submit-btn {
+  background: #28a745;
+  color: white;
+}
+
+.modal-footer .pay-submit-btn:hover {
+  background: #218838;
+}
+
+/* Invoice Modal */
+.invoice-modal {
+  max-width: 600px;
+}
+
+.invoice-body {
+  padding: 30px;
+}
+
+.invoice-header {
+  text-align: center;
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid #2a5298;
+}
+
+.invoice-header h2 {
+  margin: 0;
+  color: #2a5298;
+  font-size: 28px;
+}
+
+.invoice-header p {
+  margin: 5px 0 0 0;
+  color: #666;
+  font-size: 16px;
+}
+
+.invoice-details {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.invoice-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.invoice-row.total-row {
+  border-top: 2px solid #2a5298;
+  border-bottom: 2px solid #2a5298;
+  padding: 15px 0;
+  margin-top: 10px;
+  font-size: 18px;
+}
+
+.invoice-row span:first-child {
+  color: #666;
+}
+
+.invoice-row span:last-child {
+  color: #333;
+  font-weight: 500;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .table {
+    font-size: 12px;
+  }
+
+  .table th,
+  .table td {
+    padding: 8px;
+  }
+
+  .table button {
+    padding: 6px 12px;
+    font-size: 12px;
+    margin: 2px;
+  }
+
+  .modal-content {
+    width: 95%;
+    max-height: 95vh;
+  }
+}

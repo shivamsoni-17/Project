@@ -1,0 +1,18 @@
+<nav class="nav">
+  <div class="brand">HMS</div>
+  <div class="links">
+    <a routerLink="/customer/home" *ngIf="isCustomer()">Home</a>
+    <a routerLink="/admin/dashboard" *ngIf="isAdmin()">Dashboard</a>
+    <a routerLink="/admin/rooms" *ngIf="isAdmin()">Rooms</a>
+    <a routerLink="/admin/reservations" *ngIf="isAdmin()">Reservations</a>
+    <a routerLink="/admin/users" *ngIf="isAdmin()">Users</a>
+    <a routerLink="/admin/bills" *ngIf="isAdmin()">Bills</a>
+    <a routerLink="/admin/complaints" *ngIf="isAdmin()">Complaints</a>
+
+    <a routerLink="/staff/complaints" *ngIf="isStaff()">Complaints</a>
+  </div>
+  <div class="user">
+    <span *ngIf="session">{{ session.username }} ({{ session.role }})</span>
+    <button *ngIf="session" (click)="logout()">Logout</button>
+  </div>
+</nav>

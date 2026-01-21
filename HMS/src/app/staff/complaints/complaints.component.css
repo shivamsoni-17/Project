@@ -1,0 +1,120 @@
+.staff-page {
+  min-height: 100vh;
+  background: rgb(41, 87, 167);
+  padding: 30px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.staff-header {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+  padding: 20px 30px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.title h2 {
+  margin: 0;
+  font-size: 28px;
+  color: #2a5298;
+}
+
+.title p {
+  margin: 6px 0 0 0;
+  color: #777;
+  font-size: 14px;
+}
+
+.page {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+}
+
+.page h2 {
+  margin: 0 0 18px 0;
+  font-size: 24px;
+  color: #2a5298;
+}
+
+.primary {
+  padding: 12px 22px;
+  background: #2a5298;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.primary:hover { background: #1e3c72; }
+
+.danger {
+  padding: 12px 22px;
+  background: #e74c3c;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.danger:hover { background: #c0392b; }
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.table th {
+  background: linear-gradient(135deg, #2a5298, #1e3c72);
+  color: white;
+  padding: 15px;
+  text-align: left;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.table td {
+  padding: 12px 15px;
+  border-bottom: 1px solid #e0e0e0;
+  font-size: 14px;
+  color: #555;
+}
+
+.table tr:hover { background: #f8f9fa; }
+.table tr:last-child td { border-bottom: none; }
+
+.actions { display: flex; gap: 8px; flex-wrap: wrap; }
+
+.chip {
+  padding: 6px 12px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: bold;
+  display: inline-block;
+  background: #eef2ff;
+  color: #2a5298;
+}
+
+.muted { color: #666; margin-top: 8px; font-size: 13px; }
+.msg { color: #c00; margin-bottom: 10px; }
+
+@media (max-width: 768px) {
+  .staff-page { padding: 15px; }
+  .staff-header { padding: 16px; }
+  .page { padding: 16px; }
+}

@@ -1,0 +1,53 @@
+<section class="page">
+  <h3>Register Complaint</h3>
+
+  <div class="form-grid">
+    <div class="form-group">
+      <label>Contact *</label>
+      <input [(ngModel)]="form.contact" placeholder="Phone or email" required>
+    </div>
+    <div class="form-group">
+      <label>Room No (optional)</label>
+      <input [(ngModel)]="form.roomNo" type="number" placeholder="Room number">
+    </div>
+    <div class="form-group">
+      <label>Category *</label>
+      <input [(ngModel)]="form.category" placeholder="e.g. Housekeeping, Maintenance" required>
+    </div>
+    <div class="form-group" style="grid-column: 1 / -1;">
+      <label>Description *</label>
+      <textarea [(ngModel)]="form.description" placeholder="Describe your complaint in detail" required></textarea>
+    </div>
+  </div>
+  
+  <button class="submit-btn" (click)="submit()">Submit Complaint</button>
+
+  <div *ngIf="message" [class]="'msg ' + (message.includes('success') || message.includes('Success') ? 'success' : 'error')">{{ message }}</div>
+
+  <h3 style="margin-top: 40px;">My Complaints</h3>
+
+  <table class="table" *ngIf="complaints.length">
+    <thead>
+      <tr>
+        <th>Complaint ID</th>
+        <th>Category</th>
+        <th>Status</th>
+        <th>Created Date</th>
+        <th>Resolved Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let c of complaints">
+        <td>{{ c.id }}</td>
+        <td>{{ c.category }}</td>
+        <td>
+          <span class="chip" [ngClass]="c.status?.toLowerCase()?.replace(' ', '_')">{{ c.status }}</span>
+        </td>
+        <td>{{ c.createdAt | date:'short' }}</td>
+        <td>{{ c.resolvedAt ? (c.resolvedAt | date:'short') : '-' }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div *ngIf="!complaints.length && !message" class="muted">No complaints filed yet.</div>
+</section>

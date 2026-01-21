@@ -1,0 +1,54 @@
+<section class="admin-page">
+  <div class="admin-header">
+    <div class="title">
+      <h2>Admin Home</h2>
+      <p>Manage rooms, reservations, users, bills, and complaints.</p>
+    </div>
+
+    <div class="header-actions">
+      <div class="tabs">
+        <button [class.active]="activeTab==='dashboard'" (click)="setTab('dashboard')">Overview</button>
+        <button [class.active]="activeTab==='rooms'" (click)="setTab('rooms')">Rooms</button>
+        <button [class.active]="activeTab==='reservations'" (click)="setTab('reservations')">Reservations</button>
+        <button [class.active]="activeTab==='users'" (click)="setTab('users')">Users</button>
+        <button [class.active]="activeTab==='bills'" (click)="setTab('bills')">Bills</button>
+        <button [class.active]="activeTab==='complaints'" (click)="setTab('complaints')">Complaints</button>
+      </div>
+      <button class="logout-btn" (click)="logout()">Logout</button>
+    </div>
+  </div>
+
+  <ng-container *ngIf="activeTab==='dashboard'">
+    <div class="panel">
+      <h3>Quick Overview</h3>
+      <div class="error-msg" *ngIf="error">{{ error }}</div>
+      <div class="grid" *ngIf="!loading">
+        <div class="card" *ngFor="let c of cards">
+          <div class="label">{{ c.label }}</div>
+          <div class="value">{{ c.value }}</div>
+        </div>
+      </div>
+      <div class="loading" *ngIf="loading">Loading statistics...</div>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="activeTab==='rooms'">
+    <app-admin-rooms></app-admin-rooms>
+  </ng-container>
+
+  <ng-container *ngIf="activeTab==='reservations'">
+    <app-admin-reservations></app-admin-reservations>
+  </ng-container>
+
+  <ng-container *ngIf="activeTab==='users'">
+    <app-admin-users></app-admin-users>
+  </ng-container>
+
+  <ng-container *ngIf="activeTab==='bills'">
+    <app-admin-bills></app-admin-bills>
+  </ng-container>
+
+  <ng-container *ngIf="activeTab==='complaints'">
+    <app-admin-complaints></app-admin-complaints>
+  </ng-container>
+</section>

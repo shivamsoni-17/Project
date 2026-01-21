@@ -1,0 +1,77 @@
+<section class="page">
+  <!-- Local customer header for features -->
+  <div class="customer-header">
+    <h2>Customer Home</h2>
+    <div class="tabs">
+      <button [class.active]="activeTab==='search'" (click)="setTab('search')">Search & Book</button>
+      <button [class.active]="activeTab==='bookings'" (click)="setTab('bookings')">My Bookings</button>
+      <button [class.active]="activeTab==='bills'" (click)="setTab('bills')">Pay Bill</button>
+      <button [class.active]="activeTab==='complaints'" (click)="setTab('complaints')">Complaints</button>
+      <button [class.active]="activeTab==='profile'" (click)="setTab('profile')">Profile</button>
+      <button class="logout-btn" (click)="logout()">Logout</button>
+    </div>
+  </div>
+
+  <!-- SEARCH & ROOMS in same page -->
+  <ng-container *ngIf="activeTab==='search'">
+    <div class="search-container">
+      <h3>Search Rooms</h3>
+
+      <div class="search-form">
+        <input type="date" [(ngModel)]="searchData.checkIn" />
+        <input type="date" [(ngModel)]="searchData.checkOut" />
+
+        <select [(ngModel)]="searchData.type">
+          <option value="">Select Room Type</option>
+          <option value="SINGLE">Single</option>
+          <option value="DOUBLE">Double</option>
+          <option value="DELUXE">Deluxe</option>
+          <option value="SUITE">Suite</option>
+          <option value="FAMILY">Family</option>
+          <option value="TWIN">Twin</option>
+        </select>
+
+        <button (click)="searchRooms()">Search</button>
+      </div>
+
+      <p class="message" *ngIf="message">{{ message }}</p>
+    </div>
+
+    <div class="rooms-container">
+      <h3>Available Rooms</h3>
+
+      <div class="room-grid">
+        <div class="room-card" *ngFor="let room of rooms">
+          <h4>{{ room.type }}</h4>
+          <p>Room No: {{ room.roomNo }}</p>
+          <p class="price">₹ {{ room.price }}</p>
+
+          <button (click)="bookRoom(room.roomNo)">
+            Book Now
+          </button>
+        </div>
+      </div>
+
+      <p class="no-rooms" *ngIf="rooms.length === 0">
+        No rooms available
+      </p>
+    </div>
+  </ng-container>
+
+  <!-- Other features embedded on same page -->
+  <ng-container *ngIf="activeTab==='bookings'">
+    <app-customer-bookings></app-customer-bookings>
+  </ng-container>
+
+  <ng-container *ngIf="activeTab==='bills'">
+    <app-customer-bills></app-customer-bills>
+  </ng-container>
+
+  <ng-container *ngIf="activeTab==='complaints'">
+    <app-customer-complaints></app-customer-complaints>
+  </ng-container>
+
+  <ng-container *ngIf="activeTab==='profile'">
+    <app-customer-profile></app-customer-profile>
+  </ng-container>
+</section>

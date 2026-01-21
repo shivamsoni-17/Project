@@ -1,0 +1,31 @@
+<section class="page">
+  <h2>Complaints</h2>
+  <div class="filters">
+    <select [(ngModel)]="filterStatus">
+      <option value="">All statuses</option>
+      <option *ngFor="let s of ['OPEN','IN PROGRESS','RESOLVED','CLOSED','CANCELLED']">{{ s }}</option>
+    </select>
+    <button (click)="load()">Filter</button>
+  </div>
+  <div class="msg" *ngIf="message">{{ message }}</div>
+
+  <table class="table" *ngIf="complaints.length">
+    <thead><tr><th>ID</th><th>User</th><th>Room</th><th>Category</th><th>Status</th><th>Created</th><th>Actions</th></tr></thead>
+    <tbody>
+      <tr *ngFor="let c of complaints">
+        <td>{{ c.id }}</td>
+        <td>{{ c.userId }}</td>
+        <td>{{ c.roomNo || '-' }}</td>
+        <td>{{ c.category }}</td>
+        <td>{{ c.status }}</td>
+        <td>{{ c.createdAt }}</td>
+        <td>
+          <button (click)="setStatus(c, 'IN PROGRESS')">In Progress</button>
+          <button (click)="setStatus(c, 'RESOLVED')">Resolve</button>
+          <button (click)="setStatus(c, 'CLOSED')">Close</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div *ngIf="!complaints.length && !message" class="muted">No complaints found.</div>
+</section>

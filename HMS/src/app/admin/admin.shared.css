@@ -1,0 +1,115 @@
+/* Shared admin panel styles (match login/register theme) */
+.page {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.page h2 {
+  margin: 0 0 18px 0;
+  font-size: 24px;
+  color: #2a5298;
+}
+
+.filters, .form-grid {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.filters input,
+.filters select,
+.form-grid input,
+.form-grid select {
+  padding: 12px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  transition: border 0.3s;
+}
+
+.filters input:focus,
+.filters select:focus,
+.form-grid input:focus,
+.form-grid select:focus {
+  outline: none;
+  border-color: #2a5298;
+}
+
+.filters button,
+.form-grid button,
+.page button.primary {
+  padding: 12px 24px;
+  background: #2a5298;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.filters button:hover,
+.form-grid button:hover,
+.page button.primary:hover {
+  background: #1e3c72;
+}
+
+.page button.danger {
+  background: #e74c3c;
+}
+
+.page button.danger:hover {
+  background: #c0392b;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.table th {
+  background: linear-gradient(135deg, #2a5298, #1e3c72);
+  color: white;
+  padding: 15px;
+  text-align: left;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.table td {
+  padding: 12px 15px;
+  border-bottom: 1px solid #e0e0e0;
+  font-size: 14px;
+  color: #555;
+}
+
+.table tr:hover { background: #f8f9fa; }
+.table tr:last-child td { border-bottom: none; }
+
+.chip {
+  padding: 6px 12px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: bold;
+  display: inline-block;
+  background: #eef2ff;
+}
+
+.muted { color: #666; margin-top: 8px; font-size: 13px; }
+.msg { color: #c00; margin-bottom: 10px; }
+
+@media (max-width: 768px) {
+  .page { padding: 16px; }
+  .filters input, .filters select, .filters button,
+  .form-grid input, .form-grid select, .form-grid button { width: 100%; }
+}
+

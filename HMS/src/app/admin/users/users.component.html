@@ -1,0 +1,27 @@
+<section class="page">
+  <h2>Users</h2>
+  <div class="filters">
+    <input placeholder="Search by name/email/username" [(ngModel)]="filter">
+    <button (click)="load()">Search</button>
+  </div>
+  <div class="msg" *ngIf="message">{{ message }}</div>
+  <table class="table" *ngIf="users.length">
+    <thead><tr><th>ID</th><th>Name</th><th>Email</th><th>Mobile</th><th>Username</th><th>Role</th><th>Actions</th></tr></thead>
+    <tbody>
+      <tr *ngFor="let u of users">
+        <td>{{ u.id }}</td>
+        <td>{{ u.fullName }}</td>
+        <td>{{ u.email }}</td>
+        <td>{{ u.mobile }}</td>
+        <td>{{ u.username }}</td>
+        <td>{{ u.role }}</td>
+        <td>
+          <button (click)="setRole(u, 'customer')">Customer</button>
+          <button (click)="setRole(u, 'staff')">Staff</button>
+          <button (click)="setRole(u, 'admin')">Admin</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div *ngIf="!users.length && !message" class="muted">No users found.</div>
+</section>

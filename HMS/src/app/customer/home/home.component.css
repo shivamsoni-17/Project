@@ -1,0 +1,246 @@
+/* Full page background matching login/register */
+.page {
+  min-height: 100vh;
+  background: rgb(41, 87, 167);
+  padding: 30px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Customer header with tabs */
+.customer-header {
+  background: white;
+  padding: 20px 30px;
+  border-radius: 12px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.customer-header h2 {
+  margin: 0;
+  font-size: 28px;
+  color: #2a5298;
+}
+
+.tabs {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.tabs button {
+  padding: 10px 20px;
+  background: #f4f6f9;
+  color: #2a5298;
+  border: 2px solid transparent;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.tabs button:hover {
+  background: #e0e6f0;
+}
+
+.tabs button.active {
+  background: linear-gradient(135deg, #2a5298, #1e3c72);
+  color: white;
+}
+
+.logout-btn {
+  background: #e74c3c;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.logout-btn:hover {
+  background: #c0392b;
+}
+
+/* Search container */
+.search-container {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+  margin-bottom: 20px;
+}
+
+.search-container h3 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #2a5298;
+}
+
+.search-form {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.search-form input,
+.search-form select {
+  flex: 1;
+  min-width: 150px;
+  padding: 12px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  transition: border 0.3s;
+}
+
+.search-form input:focus,
+.search-form select:focus {
+  outline: none;
+  border-color: #2a5298;
+}
+
+.search-form button {
+  padding: 12px 24px;
+  background: #2a5298;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.search-form button:hover {
+  background: #1e3c72;
+}
+
+.message {
+  margin-top: 15px;
+  padding: 10px;
+  border-radius: 6px;
+  background: #fff3cd;
+  color: #856404;
+  font-size: 14px;
+}
+
+/* Rooms container */
+.rooms-container {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+}
+
+.rooms-container h3 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #2a5298;
+}
+
+.room-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.room-card {
+  background: #f8f9fa;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+  border: 1px solid #e0e0e0;
+}
+
+.room-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.room-card h4 {
+  margin: 0 0 10px 0;
+  font-size: 20px;
+  color: #2a5298;
+}
+
+.room-card p {
+  margin: 8px 0;
+  color: #555;
+  font-size: 14px;
+}
+
+.price {
+  font-size: 22px;
+  font-weight: bold;
+  color: #27ae60;
+  margin: 15px 0;
+}
+
+.room-card button {
+  margin-top: 15px;
+  width: 100%;
+  padding: 12px;
+  background: #2a5298;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.room-card button:hover {
+  background: #1e3c72;
+}
+
+.no-rooms {
+  margin-top: 20px;
+  color: #999;
+  text-align: center;
+  font-size: 16px;
+  padding: 20px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .page {
+    padding: 15px;
+  }
+
+  .customer-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .tabs {
+    width: 100%;
+  }
+
+  .tabs button {
+    flex: 1;
+    min-width: auto;
+  }
+
+  .search-form {
+    flex-direction: column;
+  }
+
+  .search-form input,
+  .search-form select {
+    width: 100%;
+  }
+
+  .room-grid {
+    grid-template-columns: 1fr;
+  }
+}
