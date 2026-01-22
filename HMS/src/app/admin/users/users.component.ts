@@ -14,6 +14,7 @@ export class AdminUsersComponent implements OnInit {
   users: any[] = [];
   filter = '';
   message = '';
+  successMessage = '';
 
   constructor(private userService: UserService) {}
 
@@ -28,5 +29,20 @@ export class AdminUsersComponent implements OnInit {
 
   setRole(u: any, role: string) {
     this.userService.update(u.id, { role }).subscribe({ next: () => this.load() });
+  }
+
+  deleteUser(u: any) {
+    if (confirm(`Are you sure you want to delete user '${u.username}'? This action cannot be undone.`)) {
+      this.userService.delete(u.id).subscribe({
+        next: () => {
+          this.successMessage = `User '${u.username}' deleted successfully`;
+          setTimeout(() => this.successMessage = '', 3000);
+          this.load();
+        },
+        error: (err) => {
+          this.message = err.error?.message || 'Failed to delete user';
+        }
+      });
+    }
   }
 }

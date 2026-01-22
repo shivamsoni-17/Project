@@ -4,9 +4,10 @@
     <input placeholder="Search by name/email/username" [(ngModel)]="filter">
     <button (click)="load()">Search</button>
   </div>
-  <div class="msg" *ngIf="message">{{ message }}</div>
+  <div class="msg success" *ngIf="successMessage">{{ successMessage }}</div>
+  <div class="msg error" *ngIf="message">{{ message }}</div>
   <table class="table" *ngIf="users.length">
-    <thead><tr><th>ID</th><th>Name</th><th>Email</th><th>Mobile</th><th>Username</th><th>Role</th><th>Actions</th></tr></thead>
+    <thead><tr><th>ID</th><th>Name</th><th>Email</th><th>Mobile</th><th>Username</th><th>Role</th><th>Actions</th><th>Delete</th></tr></thead>
     <tbody>
       <tr *ngFor="let u of users">
         <td>{{ u.id }}</td>
@@ -14,11 +15,17 @@
         <td>{{ u.email }}</td>
         <td>{{ u.mobile }}</td>
         <td>{{ u.username }}</td>
-        <td>{{ u.role }}</td>
-        <td>
-          <button (click)="setRole(u, 'customer')">Customer</button>
-          <button (click)="setRole(u, 'staff')">Staff</button>
-          <button (click)="setRole(u, 'admin')">Admin</button>
+        <td><span class="role-badge" [ngClass]="'role-' + u.role.toLowerCase()">{{ u.role }}</span></td>
+        <td class="actions">
+          <button (click)="setRole(u, 'customer')" [disabled]="u.role === 'customer'">Customer</button>
+          <button (click)="setRole(u, 'staff')" [disabled]="u.role === 'staff'">Staff</button>
+          <button (click)="setRole(u, 'admin')" [disabled]="u.role === 'admin'">Admin</button>
+        </td>
+        <td class="delete-action" *ngIf="u.role !== 'admin'">
+          <button class="delete-btn" (click)="deleteUser(u)" title="Delete user">🗑️</button>
+        </td>
+        <td class="delete-action" *ngIf="u.role === 'admin'">
+          <span class="disabled-text">-</span>
         </td>
       </tr>
     </tbody>

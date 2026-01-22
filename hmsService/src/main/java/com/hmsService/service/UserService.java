@@ -56,5 +56,14 @@ public class UserService {
         user.setPassword(null);
         return user;
     }
+
+    @Transactional
+    public void delete(Long id) {
+        User user = userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("User not found"));
+        if ("admin".equals(user.getRole())) {
+            throw new IllegalArgumentException("Cannot delete admin users");
+        }
+        userRepository.delete(id);
+    }
 }
 

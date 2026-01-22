@@ -130,4 +130,8 @@ public class UserRepository {
                         || (u.getUsername() != null && u.getUsername().toLowerCase().contains(lowerQuery)))
                 .collect(Collectors.toList());
     }
+
+    public void delete(Long userId) {
+        jdbcTemplate.update("delete from users where userid = ?", userId);
+    }
 }

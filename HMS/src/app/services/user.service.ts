@@ -20,4 +20,8 @@ export class UserService {
     if (query) { params.q = query; }
     return this.http.get(this.baseUrl, { params });
   }
+
+  delete(id: number) {
+    return this.http.delete(`${this.baseUrl}/${id}`);
+  }
 }

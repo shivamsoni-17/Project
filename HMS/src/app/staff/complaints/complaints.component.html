@@ -1,34 +1,80 @@
 <section class="staff-page">
   <div class="staff-header">
     <div class="title">
-      <h2>Staff Home</h2>
-      <p>Manage customer complaints and update their status.</p>
+      <h2>Staff Dashboard - Complaints Management</h2>
+      <p>Manage and resolve customer complaints.</p>
     </div>
-    <button class="primary" (click)="load()">Refresh</button>
+    <div class="header-actions">
+      <button class="primary" (click)="load()" [disabled]="isLoading">
+        {{ isLoading ? 'Loading...' : 'Refresh' }}
+      </button>
+      <button class="danger" (click)="logout()">Logout</button>
+    </div>
   </div>
 
   <div class="page">
-    <h2>Complaints</h2>
-    <div class="msg" *ngIf="message">{{ message }}</div>
+    <div class="section-header">
+      <h2>All Complaints</h2>
+      <div class="filter-group">
+        <label for="statusFilter">Filter by Status:</label>
+        <select id="statusFilter" [(ngModel)]="filterStatus" (change)="onFilterChange()">
+          <option value="">All Statuses</option>
+          <option value="OPEN">Open</option>
+          <option value="IN_PROGRESS">In Progress</option>
+          <option value="RESOLVED">Resolved</option>
+          <option value="CLOSED">Closed</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="msg success" *ngIf="successMessage">{{ successMessage }}</div>
+    <div class="msg error" *ngIf="message">{{ message }}</div>
 
     <table class="table" *ngIf="complaints.length">
       <thead>
       <tr>
-        <th>ID</th><th>User</th><th>Room</th><th>Category</th><th>Status</th><th>Created</th><th>Actions</th>
+        <th>ID</th>
+        <th>User ID</th>
+        <th>Room</th>
+        <th>Category</th>
+        <th>Description</th>
+        <th>Status</th>
+        <th>Created</th>
+        <th>Actions</th>
       </tr>
       </thead>
       <tbody>
       <tr *ngFor="let c of complaints">
-        <td>{{ c.id }}</td>
+        <td><strong>{{ c.id }}</strong></td>
         <td>{{ c.userId }}</td>
         <td>{{ c.roomNo || '-' }}</td>
-        <td>{{ c.category }}</td>
-        <td><span class="chip">{{ c.status }}</span></td>
-        <td>{{ c.createdAt }}</td>
+        <td><span class="badge">{{ c.category }}</span></td>
+        <td class="description">{{ c.description | slice:0:50 }}{{ c.description?.length > 50 ? '...' : '' }}</td>
+        <td>
+          <span class="status" [ngClass]="'status-' + (c.status | lowercase)">
+            {{ c.status }}
+          </span>
+        </td>
+        <td>{{ c.createdAt | date:'short' }}</td>
         <td class="actions">
-          <button class="primary" (click)="setStatus(c, 'IN PROGRESS')">In Progress</button>
-          <button class="primary" (click)="setStatus(c, 'RESOLVED')">Resolve</button>
-          <button class="danger" (click)="setStatus(c, 'CLOSED')">Close</button>
+          <button 
+            class="primary" 
+            (click)="setStatus(c, 'IN_PROGRESS')"
+            [disabled]="c.status === 'IN_PROGRESS' || c.status === 'CLOSED'">
+            In Progress
+          </button>
+          <button 
+            class="success" 
+            (click)="setStatus(c, 'RESOLVED')"
+            [disabled]="c.status === 'RESOLVED' || c.status === 'CLOSED'">
+            Resolve
+          </button>
+          <button 
+            class="danger" 
+            (click)="setStatus(c, 'CLOSED')"
+            [disabled]="c.status === 'CLOSED'">
+            Close
+          </button>
         </td>
       </tr>
       </tbody>
